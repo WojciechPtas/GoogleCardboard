@@ -66,9 +66,30 @@
         }                
       });   
     </script>
+    <script>
+      AFRAME.registerComponent('modify-materials', {
+        init: function () {
+          // Wait for model to load.
+          this.el.addEventListener('model-loaded', () => {
+            // Grab the mesh / scene.
+            const obj = this.el.getObject3D('mesh');
+            // Go over the submeshes and modify materials we want.
+            obj.traverse(node => {
+              if (node.name.indexOf('ship') !== -1) {
+                node.material.color.set('red');
+              }
+            });
+          });
+        }
+      });
+    </script>
   </head>
   <body>
     <a-scene>
+      <a-assets>
+        <a-asset-item id="cityModel" src="https://cdn.aframe.io/test-models/models/glTF-2.0/virtualcity/VC.gltf"></a-asset-item>
+      </a-assets>
+      <a-entity gltf-model="#cityModel" modify-materials></a-entity>
       <a-box position="-1 0.5 -3" rotation="0 45 0" color="#4CC3D9" drag-rotate-component></a-box>
       <a-sphere id="sphere" position="0 1.25 -5" radius="1.25" color="#EF2D5E" change-color="color: #FFC65D"></a-sphere>
       <a-cylinder id="cylinder" position="1 0.75 -3" radius="0.5" height="1.5" color="#FFC65D" change-scale></a-cylinder>
