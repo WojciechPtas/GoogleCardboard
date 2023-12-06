@@ -49,18 +49,17 @@
           color: {default: '#666'}
         },
         init: function(){
-          var data = this.data;
           document.addEventListener('click', function(event){
-            // pick random color
-            number = number + 1;
+            number++;
             
-            if(number%2 == 0){
-              let colors = ['#4CC3D9', '#EF2D5E', '#FFC65D', '#7BC8A4'];
-              let randomColor = colors[Math.floor(Math.random() * colors.length)];
-              this.getElementById("sphere").setAttribute('color', randomColor);
+            if(number%2 == 0) {
+              const colors = ['#000', '#333', '#666', '#999', '#ccc', '#fff'];
+              const randomColor = colors[Math.floor(Math.random() * colors.length)];
+              this.getElementById("kone").setAttribute('color', randomColor);
             }
-            else{
-              this.getElementById("cylinder").setAttribute('radius', this.getElementById("cylinder").getAttribute('radius')*1.01);
+            else {
+              const kula = this.getElementById("kula");
+              kula.setAttribute('radius', kula.getAttribute('radius')*1.01);
             }
           })
         }                
@@ -121,16 +120,15 @@
         <a-asset-item id="cityModel" src="https://cdn.aframe.io/test-models/models/glTF-2.0/virtualcity/VC.gltf"></a-asset-item>
       </a-assets>
       <a-entity gltf-model="#cityModel" modify-materials></a-entity>
-      <<a-box id="box" position="-1 0.5 -3" rotation="0 45 0" color="#4CC3D9" drag-rotate-component></a-box>
-      <!-- <a-entity id="box" box position="-1 0.5 -3" rotation="0 45 0" color="#4CC3D9" drag-rotate-component></a-entity> -->
+      <a-torus id="box" position="-1 2.5 -3" rotation="0 45 0" color="#4CC3D9" drag-rotate-component></a-torus>
       <a-entity box="width: 0.5; height: 0.25; depth: 1; color: orange" position="0 1 -3"></a-entity>
-      <a-sphere id="sphere" position="0 1.25 -5" radius="1.25" color="#EF2D5E" change-color="color: #FFC65D"></a-sphere>
-      <a-cylinder id="cylinder" position="1 0.75 -3" radius="0.5" height="1.5" color="#FFC65D" change-scale></a-cylinder>
-      <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane>
+      <a-cone id="kone" position="0 .25 -3" radius="1.25" color="#FFFFFF" change-color="color: #FFFFFF"></a-cone>
+      <a-sphere id="kula" position="1 0.75 -3" radius="0.5" height="1.5" color="#E58943" change-scale></a-sphere>
+      <a-plane position="0 .1 -4" rotation="-90 0 0" width="4" height="4" color="#F28500"></a-plane>
       <a-sky color="#ECECEC"></a-sky>
       <a-entity id='cameraWrapper' position="0 0 0">
         <a-camera wasd-controls-enabled="false" look-controls="enabled:false"
-            animation="property:position; to: 0 3 0; dur: 10000">
+            animation="property:position; to: 1 3 1; dur: 10000">
         </a-camera>
     </a-entity>
 
